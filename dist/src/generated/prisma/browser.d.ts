@@ -1,0 +1,11 @@
+import * as Prisma from './internal/prismaNamespaceBrowser';
+export { Prisma };
+export * as $Enums from './enums';
+export * from './enums';
+export type User = Prisma.UserModel;
+export type Account = Prisma.AccountModel;
+export type VerificationToken = Prisma.VerificationTokenModel;
+export type PasswordResetToken = Prisma.PasswordResetTokenModel;
+export type TwoFactorToken = Prisma.TwoFactorTokenModel;
+export type TwoFactorConfirmation = Prisma.TwoFactorConfirmationModel;
+export type HostProfile = Prisma.HostProfileModel;

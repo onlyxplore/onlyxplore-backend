@@ -1,0 +1,69 @@
+import { Injectable, Logger, ConflictException } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
+import { UpdateHostProfileDto } from './dto/update-host-profile.dto';
+import { SupabaseService } from '../supabase/supabase.service';
+
+@Injectable()
+export class HostProfileService {
+  private readonly logger = new Logger(HostProfileService.name);
+
+  constructor(
+    private prisma: PrismaService,
+    private supabaseService: SupabaseService,
+  ) {}
+
+  async getProfile(userId: string) {
+    return this.prisma.hostProfile.findUnique({
+      where: { userId },
+    });
+  }
+
+  async upsertProfile(userId: string, data: UpdateHostProfileDto) {
+    try {
+      if (data.profilePhoto && data.profilePhoto.startsWith('data:image')) {
+        this.logger.log(`Uploading profile photo for user ${userId}`);
+        data.profilePhoto = await this.supabaseService.uploadBase64Image(
+          data.profilePhoto,
+          'uploads',
+          'avatars',
+        );
+      }
+
+      if (data.logo && data.logo.startsWith('data:image')) {
+        this.logger.log(`Uploading logo for user ${userId}`);
+        data.logo = await this.supabaseService.uploadBase64Image(
+          data.logo,
+          'uploads',
+          'logo',
+        );
+      }
+    } catch (e) {
+      const error = e as Error;
+      this.logger.error(`Failed to upload images: ${error.message}`);
+      throw error;
+    }
+
+    // Convert empty string username to null to prevent unique constraint errors on empty strings
+    const updateData = { ...data };
+    if (updateData.username === '') {
+      updateData.username = null as unknown as string;
+    }
+
+    try {
+      return await this.prisma.hostProfile.upsert({
+        where: { userId },
+        update: updateData,
+        create: {
+          userId,
+          ...updateData,
+        },
+      });
+    } catch (e) {
+      const error = e as { code?: string };
+      if (error.code === 'P2002') {
+        throw new ConflictException('Username is already taken');
+      }
+      throw e;
+    }
+  }
+}
