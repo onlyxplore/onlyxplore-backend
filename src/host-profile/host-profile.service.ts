@@ -50,6 +50,12 @@ export class HostProfileService {
     }
 
     try {
+      // Update the user's role to HOST when they create/update their profile
+      await this.prisma.user.update({
+        where: { id: userId },
+        data: { role: 'HOST' },
+      });
+
       return await this.prisma.hostProfile.upsert({
         where: { userId },
         update: updateData,

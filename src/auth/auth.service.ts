@@ -188,7 +188,7 @@ export class AuthService {
           name: dto.name,
           image: dto.image,
           emailVerified: new Date(),
-          role: dto.role || 'HOST',
+          role: dto.role || 'USER',
         },
       });
     } else {
