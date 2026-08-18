@@ -6,7 +6,7 @@ import {
   MinLength,
 } from 'class-validator';
 
-import { UserRole } from '../../generated/prisma/enums';
+import { UserRole } from '@prisma/client';
 
 export class RegisterDto {
   @IsEmail({}, { message: 'Please enter a valid email address.' })
