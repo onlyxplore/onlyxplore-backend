@@ -1,4 +1,4 @@
-import { Injectable, Logger, ConflictException } from '@nestjs/common';
+import { Injectable, Logger, ConflictException, Inject } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { UpdateHostProfileDto } from './dto/update-host-profile.dto';
 import { SupabaseService } from '../supabase/supabase.service';

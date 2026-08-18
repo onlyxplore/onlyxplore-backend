@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { randomInt, randomUUID } from 'crypto';
 
 @Injectable()
 export class TokenService {
-  constructor(private prisma: PrismaService) {}
+  constructor(@Inject(PrismaService) private prisma: PrismaService) {}
 
   async generateTwoFactorToken(email: string) {
     const token = randomInt(100000, 1000000).toString();
