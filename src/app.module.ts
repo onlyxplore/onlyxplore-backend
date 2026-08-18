@@ -5,6 +5,7 @@ import { AuthModule } from './auth/auth.module';
 import { MailModule } from './mail/mail.module';
 import { HostProfileModule } from './host-profile/host-profile.module';
 import { SupabaseModule } from './supabase/supabase.module';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -17,5 +18,6 @@ import { SupabaseModule } from './supabase/supabase.module';
     HostProfileModule,
     SupabaseModule,
   ],
+  controllers: [AppController],
 })
 export class AppModule {}
