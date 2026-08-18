@@ -5,6 +5,7 @@ import {
   Body,
   UseGuards,
   Request,
+  Inject,
 } from '@nestjs/common';
 import { HostProfileService } from './host-profile.service';
 import { UpdateHostProfileDto } from './dto/update-host-profile.dto';
