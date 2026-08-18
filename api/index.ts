@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from '../src/app.module';
 import { ValidationPipe, RequestMethod } from '@nestjs/common';
@@ -7,7 +8,7 @@ let cachedApp: any;
 
 async function bootstrap() {
   if (!cachedApp) {
-    const app = await NestFactory.create(AppModule);
+    const app = await NestFactory.create(AppModule, { abortOnError: false });
 
     // Enable CORS for frontend
     const configService = app.get(ConfigService);
