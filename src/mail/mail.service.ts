@@ -37,7 +37,7 @@ export class MailService {
   }
 
   async sendPasswordResetEmail(email: string, token: string): Promise<void> {
-    const resetLink = `${this.frontendUrl}/auth/new-password?token=${token}`;
+    const resetLink = `${this.frontendUrl}/new-password?token=${token}`;
 
     await this.transporter.sendMail({
       from: this.fromAddress,
@@ -48,7 +48,7 @@ export class MailService {
   }
 
   async sendVerificationEmail(email: string, token: string): Promise<void> {
-    const confirmLink = `${this.frontendUrl}/auth/new-verification?token=${token}`;
+    const confirmLink = `${this.frontendUrl}/new-verification?token=${token}`;
 
     await this.transporter.sendMail({
       from: this.fromAddress,
