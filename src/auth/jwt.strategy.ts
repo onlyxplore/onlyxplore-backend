@@ -15,8 +15,8 @@ export interface JwtPayload {
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
-    configService: ConfigService,
-    private authService: AuthService,
+    @Inject(ConfigService) configService: ConfigService,
+    @Inject(AuthService) private authService: AuthService,
   ) {
     const secret = configService.get<string>('JWT_SECRET');
     if (!secret) {

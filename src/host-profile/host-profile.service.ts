@@ -8,8 +8,8 @@ export class HostProfileService {
   private readonly logger = new Logger(HostProfileService.name);
 
   constructor(
-    private prisma: PrismaService,
-    private supabaseService: SupabaseService,
+    @Inject(PrismaService) private prisma: PrismaService,
+    @Inject(SupabaseService) private supabaseService: SupabaseService,
   ) {}
 
   async getProfile(userId: string) {

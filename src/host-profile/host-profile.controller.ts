@@ -14,7 +14,10 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 @Controller('host-profile')
 @UseGuards(JwtAuthGuard)
 export class HostProfileController {
-  constructor(@Inject(HostProfileService) private readonly hostProfileService: HostProfileService) {}
+  constructor(
+    @Inject(HostProfileService)
+    private readonly hostProfileService: HostProfileService,
+  ) {}
 
   @Get()
   getProfile(@Request() req: { user: { id: string } }) {
