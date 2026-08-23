@@ -1,15 +1,14 @@
 const { NestFactory } = require('@nestjs/core');
 const { ValidationPipe, RequestMethod } = require('@nestjs/common');
 const { ConfigService } = require('@nestjs/config');
-const serverlessExpress = require('@vendia/serverless-express');
 
 // Require the COMPILED AppModule from dist! This bypasses Vercel's esbuild completely!
 const { AppModule } = require('../dist/src/app.module');
 
-let cachedServer;
+let cachedApp;
 
 async function bootstrap() {
-  if (!cachedServer) {
+  if (!cachedApp) {
     const app = await NestFactory.create(AppModule);
 
     const configService = app.get(ConfigService);
@@ -37,16 +36,15 @@ async function bootstrap() {
 
     await app.init();
 
-    const expressApp = app.getHttpAdapter().getInstance();
-    cachedServer = serverlessExpress({ app: expressApp });
+    cachedApp = app.getHttpAdapter().getInstance();
   }
-  return cachedServer;
+  return cachedApp;
 }
 
 module.exports = async (req, res) => {
   try {
-    const server = await bootstrap();
-    return server(req, res);
+    const expressApp = await bootstrap();
+    return expressApp(req, res);
   } catch (err) {
     console.error('NestJS failed to start:', err);
     res.status(500).json({
