@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { createClient } from '@supabase/supabase-js';
-import { v4 as uuidv4 } from 'uuid';
+import * as crypto from 'crypto';
 
 @Injectable()
 export class SupabaseService {
@@ -47,7 +47,7 @@ export class SupabaseService {
       const buffer = Buffer.from(base64Data, 'base64');
 
       // 4. Generate a unique filename
-      const filename = `${folder}/${uuidv4()}.${extension}`;
+      const filename = `${folder}/${crypto.randomUUID()}.${extension}`;
 
       // 5. Upload to Supabase Storage
       const { error } = await this.supabase.storage
