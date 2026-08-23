@@ -29,7 +29,7 @@ export class AuthService {
   ) {}
 
   // ─── REGISTER ───────────────────────────────────────────
-  async register(dto: RegisterDto) {
+  async register(dto: RegisterDto, origin?: string) {
     const existingUser = await this.prisma.user.findUnique({
       where: { email: dto.email },
       select: { id: true },
@@ -57,13 +57,14 @@ export class AuthService {
     await this.mailService.sendVerificationEmail(
       verificationToken.email,
       verificationToken.token,
+      origin,
     );
 
     return { success: 'Confirmation email sent' };
   }
 
   // ─── LOGIN ──────────────────────────────────────────────
-  async login(dto: LoginDto) {
+  async login(dto: LoginDto, origin?: string) {
     const user = await this.prisma.user.findUnique({
       where: { email: dto.email },
       select: {
@@ -94,6 +95,7 @@ export class AuthService {
       await this.mailService.sendVerificationEmail(
         verificationToken.email,
         verificationToken.token,
+        origin,
       );
       return { success: 'Confirmation email sent!' };
     }
@@ -293,7 +295,7 @@ export class AuthService {
   }
 
   // ─── RESET PASSWORD (request) ──────────────────────────
-  async resetPassword(dto: ResetPasswordDto) {
+  async resetPassword(dto: ResetPasswordDto, origin?: string) {
     const existingUser = await this.prisma.user.findUnique({
       where: { email: dto.email },
       select: { id: true },
@@ -308,6 +310,7 @@ export class AuthService {
     await this.mailService.sendPasswordResetEmail(
       passwordResetToken.email,
       passwordResetToken.token,
+      origin,
     );
 
     return { success: 'Reset email sent!' };

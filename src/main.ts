@@ -17,7 +17,7 @@ async function bootstrap() {
     origin: frontendUrls,
     credentials: true,
     methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-frontend-url'],
   });
 
   // Global validation pipe

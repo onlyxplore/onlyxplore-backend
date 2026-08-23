@@ -21,7 +21,7 @@ async function bootstrap() {
       origin: frontendUrls,
       credentials: true,
       methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
-      allowedHeaders: ['Content-Type', 'Authorization'],
+      allowedHeaders: ['Content-Type', 'Authorization', 'x-frontend-url'],
     });
 
     // Global validation pipe
@@ -49,7 +49,7 @@ async function bootstrap() {
 export default async function handler(req: any, res: any) {
   try {
     const server = await bootstrap();
-    return server(req, res);
+    return server(req, res, () => {});
   } catch (error: any) {
     console.error('Serverless initialization failed:', error);
     res.status(500).json({

@@ -7,6 +7,7 @@ import {
   UseGuards,
   Request,
   Inject,
+  Headers,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './jwt-auth.guard';
@@ -25,13 +26,19 @@ export class AuthController {
   constructor(@Inject(AuthService) private authService: AuthService) {}
 
   @Post('register')
-  async register(@Body() dto: RegisterDto) {
-    return this.authService.register(dto);
+  async register(
+    @Body() dto: RegisterDto,
+    @Headers('x-frontend-url') origin?: string,
+  ) {
+    return this.authService.register(dto, origin);
   }
 
   @Post('login')
-  async login(@Body() dto: LoginDto) {
-    return this.authService.login(dto);
+  async login(
+    @Body() dto: LoginDto,
+    @Headers('x-frontend-url') origin?: string,
+  ) {
+    return this.authService.login(dto, origin);
   }
 
   @Post('google')
@@ -45,8 +52,11 @@ export class AuthController {
   }
 
   @Post('reset-password')
-  async resetPassword(@Body() dto: ResetPasswordDto) {
-    return this.authService.resetPassword(dto);
+  async resetPassword(
+    @Body() dto: ResetPasswordDto,
+    @Headers('x-frontend-url') origin?: string,
+  ) {
+    return this.authService.resetPassword(dto, origin);
   }
 
   @Post('new-password')
