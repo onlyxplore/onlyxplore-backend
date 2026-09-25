@@ -1,0 +1,90 @@
+import { Injectable } from '@nestjs/common';
+
+@Injectable()
+export class HostDashboardService {
+
+  getStats() {
+    return {
+      totalTrips: 12,
+      activeTrips: 5,
+      totalBookings: 348,
+      pendingBookings: 23,
+      totalRevenue: 428500,
+      monthlyRevenue: 86200,
+      avgRating: 4.8,
+      totalReviews: 156,
+      totalTravelers: 892,
+      revenueGrowth: 12.4,
+      bookingGrowth: 8.7,
+      revenueChart: [
+        { month: "Apr", revenue: 32000 },
+        { month: "May", revenue: 45000 },
+        { month: "Jun", revenue: 61000 },
+        { month: "Jul", revenue: 58000 },
+        { month: "Aug", revenue: 72000 },
+        { month: "Sep", revenue: 86200 },
+      ],
+    };
+  }
+
+  getItineraries() {
+    return [
+      { id: 1, title: "Himalayan Base Camp Trek", location: "Himachal Pradesh", status: "active", bookings: 48, seats: 60, price: 12500, rating: 4.9, startDate: "2026-10-15", image: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=600" },
+      { id: 2, title: "Royal Rajasthan Heritage Tour", location: "Jaipur, Rajasthan", status: "active", bookings: 32, seats: 40, price: 8500, rating: 4.8, startDate: "2026-10-22", image: "https://images.unsplash.com/photo-1477587458883-47145ed94245?q=80&w=600" },
+      { id: 3, title: "Serene Kerala Backwaters", location: "Alleppey, Kerala", status: "active", bookings: 28, seats: 30, price: 6000, rating: 5.0, startDate: "2026-11-05", image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=600" },
+      { id: 4, title: "Hidden Beaches of South Goa", location: "South Goa", status: "draft", bookings: 0, seats: 25, price: 4500, rating: 0, startDate: "", image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=600" },
+      { id: 5, title: "Spiti Valley Expedition", location: "Spiti, Himachal", status: "active", bookings: 18, seats: 20, price: 18000, rating: 4.9, startDate: "2026-11-12", image: "https://images.unsplash.com/photo-1596423735880-5f2a689b903e?q=80&w=600" },
+      { id: 6, title: "Rishikesh Rafting & Camping", location: "Uttarakhand", status: "completed", bookings: 60, seats: 60, price: 2500, rating: 4.6, startDate: "2026-09-10", image: "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?q=80&w=600" },
+      { id: 7, title: "Meghalaya Living Roots Tour", location: "Shillong", status: "active", bookings: 15, seats: 25, price: 11000, rating: 4.8, startDate: "2026-12-01", image: "https://images.unsplash.com/photo-1571536802807-30451e3955d8?q=80&w=600" },
+      { id: 8, title: "Valley of Flowers Trek", location: "Uttarakhand", status: "draft", bookings: 0, seats: 20, price: 11500, rating: 0, startDate: "", image: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=600" },
+    ];
+  }
+
+  getBookings() {
+    return [
+      { id: 1, traveler: "Arjun Mehta", email: "arjun@gmail.com", trip: "Himalayan Base Camp Trek", date: "2026-10-15", seats: 2, amount: 25000, status: "confirmed", avatar: "" },
+      { id: 2, traveler: "Priya Sharma", email: "priya@gmail.com", trip: "Royal Rajasthan Heritage Tour", date: "2026-10-22", seats: 1, amount: 8500, status: "confirmed", avatar: "" },
+      { id: 3, traveler: "Vikram Patel", email: "vikram@outlook.com", trip: "Serene Kerala Backwaters", date: "2026-11-05", seats: 3, amount: 18000, status: "pending", avatar: "" },
+      { id: 4, traveler: "Sneha Reddy", email: "sneha@yahoo.com", trip: "Himalayan Base Camp Trek", date: "2026-10-15", seats: 1, amount: 12500, status: "confirmed", avatar: "" },
+      { id: 5, traveler: "Karan Singh", email: "karan@gmail.com", trip: "Spiti Valley Expedition", date: "2026-11-12", seats: 2, amount: 36000, status: "pending", avatar: "" },
+      { id: 6, traveler: "Aditi Nair", email: "aditi@gmail.com", trip: "Meghalaya Living Roots Tour", date: "2026-12-01", seats: 1, amount: 11000, status: "confirmed", avatar: "" },
+      { id: 7, traveler: "Rohan Kumar", email: "rohan@gmail.com", trip: "Rishikesh Rafting & Camping", date: "2026-09-10", seats: 4, amount: 10000, status: "completed", avatar: "" },
+      { id: 8, traveler: "Meera Joshi", email: "meera@gmail.com", trip: "Royal Rajasthan Heritage Tour", date: "2026-10-22", seats: 2, amount: 17000, status: "confirmed", avatar: "" },
+      { id: 9, traveler: "Aditya Rao", email: "aditya@gmail.com", trip: "Serene Kerala Backwaters", date: "2026-11-05", seats: 1, amount: 6000, status: "cancelled", avatar: "" },
+      { id: 10, traveler: "Nisha Gupta", email: "nisha@gmail.com", trip: "Himalayan Base Camp Trek", date: "2026-10-15", seats: 2, amount: 25000, status: "confirmed", avatar: "" },
+    ];
+  }
+
+  getAnalytics() {
+    return {
+      revenueByMonth: [
+        { month: "Apr", revenue: 32000 },
+        { month: "May", revenue: 45000 },
+        { month: "Jun", revenue: 61000 },
+        { month: "Jul", revenue: 58000 },
+        { month: "Aug", revenue: 72000 },
+        { month: "Sep", revenue: 86200 },
+      ],
+      bookingsByTrip: [
+        { trip: "Himalayan Trek", bookings: 48 },
+        { trip: "Rajasthan Tour", bookings: 32 },
+        { trip: "Kerala Backwaters", bookings: 28 },
+        { trip: "Spiti Valley", bookings: 18 },
+        { trip: "Meghalaya", bookings: 15 },
+      ],
+      audienceSplit: [
+        { label: "18-25", value: 35 },
+        { label: "26-35", value: 40 },
+        { label: "36-45", value: 15 },
+        { label: "46+", value: 10 },
+      ],
+      topCities: [
+        { city: "Mumbai", travelers: 120 },
+        { city: "Delhi", travelers: 98 },
+        { city: "Bangalore", travelers: 87 },
+        { city: "Pune", travelers: 65 },
+        { city: "Hyderabad", travelers: 54 },
+      ],
+    };
+  }
+}

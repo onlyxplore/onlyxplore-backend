@@ -1,0 +1,109 @@
+import { Injectable } from '@nestjs/common';
+
+@Injectable()
+export class AdminDashboardService {
+
+  getStats() {
+    return {
+      totalTrips: 68,
+      totalHosts: 142,
+      verifiedHosts: 98,
+      totalBookings: 4520,
+      totalRevenue: 12850000,
+      activeTravelers: 8940,
+      topStates: [
+        { state: "Himachal Pradesh", trips: 12, bookings: 840 },
+        { state: "Rajasthan", trips: 9, bookings: 720 },
+        { state: "Kerala", trips: 8, bookings: 680 },
+        { state: "Uttarakhand", trips: 7, bookings: 590 },
+        { state: "Karnataka", trips: 6, bookings: 450 },
+        { state: "Goa", trips: 5, bookings: 380 },
+      ],
+      monthlyGrowth: [
+        { month: "Apr", trips: 42, bookings: 2800, revenue: 7200000 },
+        { month: "May", trips: 48, bookings: 3100, revenue: 8100000 },
+        { month: "Jun", trips: 52, bookings: 3400, revenue: 9200000 },
+        { month: "Jul", trips: 55, bookings: 3600, revenue: 9800000 },
+        { month: "Aug", trips: 60, bookings: 4000, revenue: 11200000 },
+        { month: "Sep", trips: 68, bookings: 4520, revenue: 12850000 },
+      ],
+      categoryDistribution: [
+        { category: "Adventure", count: 18 },
+        { category: "Heritage", count: 14 },
+        { category: "Wellness", count: 10 },
+        { category: "Road Trips", count: 8 },
+        { category: "Camping", count: 9 },
+        { category: "Culinary", count: 9 },
+      ],
+    };
+  }
+
+  getHosts() {
+    return [
+      { id: 1, name: "Rahul Singh", email: "rahul@himalayantours.com", location: "Manali, HP", trips: 4, bookings: 180, revenue: 225000, rating: 4.9, verified: true, joinedAt: "2026-03-15" },
+      { id: 2, name: "Anita Desai", email: "anita@rajasthantours.in", location: "Jaipur, Rajasthan", trips: 3, bookings: 120, revenue: 102000, rating: 4.8, verified: true, joinedAt: "2026-04-02" },
+      { id: 3, name: "Wanderlust India", email: "info@wanderlust.in", location: "Alleppey, Kerala", trips: 2, bookings: 210, revenue: 126000, rating: 5.0, verified: true, joinedAt: "2026-02-20" },
+      { id: 4, name: "Sunsets Goa", email: "sunsets@goa.com", location: "South Goa", trips: 2, bookings: 56, revenue: 25200, rating: 4.7, verified: true, joinedAt: "2026-05-10" },
+      { id: 5, name: "Divine Journeys", email: "divine@journeys.co", location: "Varanasi, UP", trips: 1, bookings: 178, revenue: 62300, rating: 4.9, verified: true, joinedAt: "2026-01-18" },
+      { id: 6, name: "Mountain Tales", email: "tales@mountain.in", location: "Shillong, Meghalaya", trips: 2, bookings: 92, revenue: 101200, rating: 4.8, verified: true, joinedAt: "2026-06-01" },
+      { id: 7, name: "River Runners", email: "river@runners.co", location: "Rishikesh, UK", trips: 3, bookings: 340, revenue: 85000, rating: 4.6, verified: true, joinedAt: "2026-04-22" },
+      { id: 8, name: "Green Stays", email: "green@stays.in", location: "Coorg, KA", trips: 1, bookings: 45, revenue: 24750, rating: 4.9, verified: false, joinedAt: "2026-07-15" },
+      { id: 9, name: "Himalayan Roads", email: "roads@himalayan.in", location: "Spiti, HP", trips: 2, bookings: 201, revenue: 361800, rating: 4.9, verified: true, joinedAt: "2026-03-08" },
+      { id: 10, name: "Desert Safaris", email: "desert@safaris.in", location: "Kutch, Gujarat", trips: 1, bookings: 145, revenue: 129050, rating: 4.8, verified: true, joinedAt: "2026-05-25" },
+      { id: 11, name: "Ice Trekkers", email: "ice@trekkers.in", location: "Leh, Ladakh", trips: 1, bookings: 78, revenue: 195000, rating: 5.0, verified: true, joinedAt: "2026-02-14" },
+      { id: 12, name: "Heritage Walks", email: "heritage@walks.co", location: "Hampi, KA", trips: 2, bookings: 156, revenue: 65520, rating: 4.8, verified: false, joinedAt: "2026-08-01" },
+    ];
+  }
+
+  getDestinations() {
+    return [
+      { id: 1, name: "Manali", state: "Himachal Pradesh", lat: 32.2396, lng: 77.1887, trips: 4, monthlyVisitors: 12000, rating: 4.8, trending: true },
+      { id: 2, name: "Jaipur", state: "Rajasthan", lat: 26.9124, lng: 75.7873, trips: 3, monthlyVisitors: 18000, rating: 4.7, trending: true },
+      { id: 3, name: "Alleppey", state: "Kerala", lat: 9.4981, lng: 76.3388, trips: 2, monthlyVisitors: 8500, rating: 4.9, trending: false },
+      { id: 4, name: "South Goa", state: "Goa", lat: 15.2993, lng: 74.1240, trips: 2, monthlyVisitors: 22000, rating: 4.6, trending: true },
+      { id: 5, name: "Varanasi", state: "Uttar Pradesh", lat: 25.3176, lng: 82.9739, trips: 1, monthlyVisitors: 15000, rating: 4.8, trending: false },
+      { id: 6, name: "Shillong", state: "Meghalaya", lat: 25.5788, lng: 91.8933, trips: 2, monthlyVisitors: 5200, rating: 4.9, trending: true },
+      { id: 7, name: "Rishikesh", state: "Uttarakhand", lat: 30.0869, lng: 78.2676, trips: 3, monthlyVisitors: 14000, rating: 4.7, trending: true },
+      { id: 8, name: "Coorg", state: "Karnataka", lat: 12.3375, lng: 75.8069, trips: 1, monthlyVisitors: 6800, rating: 4.8, trending: false },
+      { id: 9, name: "Spiti Valley", state: "Himachal Pradesh", lat: 32.2222, lng: 78.0322, trips: 2, monthlyVisitors: 3200, rating: 4.9, trending: true },
+      { id: 10, name: "Hampi", state: "Karnataka", lat: 15.3350, lng: 76.4600, trips: 2, monthlyVisitors: 9500, rating: 4.8, trending: false },
+      { id: 11, name: "Leh-Ladakh", state: "J&K", lat: 34.1526, lng: 77.5771, trips: 1, monthlyVisitors: 4500, rating: 5.0, trending: true },
+      { id: 12, name: "Rann of Kutch", state: "Gujarat", lat: 23.7337, lng: 69.8597, trips: 1, monthlyVisitors: 7800, rating: 4.7, trending: false },
+    ];
+  }
+
+  getAnalytics() {
+    return {
+      touristFlow: [
+        { month: "Apr", domestic: 280000, international: 12000 },
+        { month: "May", domestic: 310000, international: 15000 },
+        { month: "Jun", domestic: 420000, international: 18000 },
+        { month: "Jul", domestic: 380000, international: 14000 },
+        { month: "Aug", domestic: 350000, international: 16000 },
+        { month: "Sep", domestic: 520000, international: 22000 },
+      ],
+      revenueByState: [
+        { state: "Himachal Pradesh", revenue: 3200000 },
+        { state: "Rajasthan", revenue: 2800000 },
+        { state: "Kerala", revenue: 2100000 },
+        { state: "Uttarakhand", revenue: 1900000 },
+        { state: "Goa", revenue: 1500000 },
+        { state: "Karnataka", revenue: 1200000 },
+      ],
+      schemePerformance: [
+        { scheme: "Swadesh Darshan 2.0", allocated: 5000000, utilized: 3200000, beneficiaries: 12000 },
+        { scheme: "PRASHAD", allocated: 3000000, utilized: 2100000, beneficiaries: 8500 },
+        { scheme: "Dekho Apna Desh", allocated: 2000000, utilized: 1800000, beneficiaries: 22000 },
+        { scheme: "Incredible India 2.0", allocated: 8000000, utilized: 5500000, beneficiaries: 45000 },
+      ],
+      hostGrowth: [
+        { month: "Apr", hosts: 82, verified: 58 },
+        { month: "May", hosts: 95, verified: 68 },
+        { month: "Jun", hosts: 108, verified: 76 },
+        { month: "Jul", hosts: 118, verified: 82 },
+        { month: "Aug", hosts: 130, verified: 90 },
+        { month: "Sep", hosts: 142, verified: 98 },
+      ],
+    };
+  }
+}

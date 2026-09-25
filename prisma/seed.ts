@@ -1,7 +1,6 @@
 // @ts-nocheck
 import 'dotenv/config';
 import { PrismaService } from '../src/prisma/prisma.service';
-import { UserRole } from '../src/generated/prisma/enums';
 import * as bcrypt from 'bcryptjs';
 
 const prisma = new PrismaService();
@@ -14,34 +13,56 @@ async function main() {
   const users = [
     {
       email: 'user@onlyxplore.in',
-      name: 'Test User',
+      name: 'Test Traveler',
       password,
-      role: UserRole.USER,
+      role: 'USER',
       emailVerified: now,
+      image: 'https://i.pravatar.cc/150?u=user',
     },
     {
-      email: 'admin@onlyxplore.in',
-      name: 'Admin User',
+      email: 'gov@onlyxplore.in',
+      name: 'Gov Admin',
       password,
-      role: UserRole.ADMIN,
+      role: 'ADMIN',
       emailVerified: now,
+      image: 'https://i.pravatar.cc/150?u=gov',
     },
     {
       email: 'host@onlyxplore.in',
-      name: 'Host User',
+      name: 'Host Creator',
       password,
-      role: UserRole.HOST,
+      role: 'HOST',
       emailVerified: now,
+      image: 'https://i.pravatar.cc/150?u=host',
     },
   ];
 
   for (const user of users) {
     const createdUser = await prisma.user.upsert({
       where: { email: user.email },
-      update: {},
+      update: user,
       create: user,
     });
     console.log(`Upserted user: ${createdUser.email} with role ${createdUser.role}`);
+
+    if (createdUser.role === 'HOST') {
+      await prisma.hostProfile.upsert({
+        where: { userId: createdUser.id },
+        update: {},
+        create: {
+          userId: createdUser.id,
+          username: 'onlyxplore_host',
+          firstName: 'Host',
+          lastName: 'Creator',
+          bio: 'Verified host on OnlyXplore',
+          hostCategory: 'Agency',
+          hostTypes: ['Guide', 'Agency'],
+          experienceTypes: ['Adventure', 'Heritage'],
+          primaryLocation: 'India',
+        },
+      });
+      console.log('Upserted HostProfile for host user.');
+    }
   }
 
   console.log('Seeding finished.');
