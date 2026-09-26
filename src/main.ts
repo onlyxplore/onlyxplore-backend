@@ -10,7 +10,8 @@ async function bootstrap() {
   // Enable CORS for frontend
   const configService = app.get(ConfigService);
   const frontendUrl =
-    configService.get<string>('FRONTEND_URL') || 'http://localhost:3000';
+    configService.get<string>('FRONTEND_URL') ||
+    'http://localhost:3000,http://localhost:3001,http://localhost:3002,https://onlyxplore-web.vercel.app,https://onlyxplore-host.vercel.app,https://onlyxplore-gov.vercel.app';
   const frontendUrls = frontendUrl.split(',');
 
   app.enableCors({

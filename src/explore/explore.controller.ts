@@ -1,4 +1,10 @@
-import { Controller, Get, Query, Param, NotFoundException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Query,
+  Param,
+  NotFoundException,
+} from '@nestjs/common';
 import { ExploreService } from './explore.service';
 
 @Controller('explore')
