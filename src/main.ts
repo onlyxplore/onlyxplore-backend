@@ -35,6 +35,11 @@ async function bootstrap() {
     exclude: [{ path: '/', method: RequestMethod.GET }],
   });
 
+  // Increase payload limit for base64 image uploads
+  const { json, urlencoded } = require('express');
+  app.use(json({ limit: '50mb' }));
+  app.use(urlencoded({ extended: true, limit: '50mb' }));
+
   const port = process.env.PORT || 4000;
   await app.listen(port);
   console.log(`🚀 Backend running on http://localhost:${port}`);
